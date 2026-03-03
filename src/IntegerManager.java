@@ -7,8 +7,14 @@ abstract class IntegerManager {
     /** Adds integers to the list until a sentinel value is submitted */
     abstract void buildList();
 
+
+
+
     /** Uses selection shuffle algorithm */
     abstract void shuffle();
+    //loop through all numbers, index i 
+    //pick random sport r
+    // 3 part swap r -> temp 
 
     /** Sorts the list of integers using insertion sort */
     abstract void insertionSort();
