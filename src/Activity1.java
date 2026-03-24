@@ -4,11 +4,16 @@ public class Activity1 extends IntegerManager implements PrintPretty {
         thingie.buildList();
         thingie.printPretty();
         thingie.shuffle();
+        // thingie.printPretty();
+        // thingie.selectionSort();
+        // thingie.printPretty();
+        // thingie.selectionSort(true);
         thingie.printPretty();
-        thingie.selectionSort();
+        thingie.insertionSort();
         thingie.printPretty();
-        thingie.selectionSort(true);
+        thingie.insertionSort(true);
         thingie.printPretty();
+
     }
 
     @Override
@@ -31,35 +36,61 @@ public class Activity1 extends IntegerManager implements PrintPretty {
         }
     }
 
+    boolean highToLow = false;
+
+    void insertionSort(boolean highToLow) {
+        if (!highToLow) {
+            insertionSort();
+            return;
+        } else if (highToLow) {
+            for (int k = 1; k < nums.length; k++) {
+                int i = k - 1;
+                int key = nums[k];
+                while (i > -1 && nums[i] < key) {
+                    nums[i + 1] = nums[i];
+                    i--;
+                }
+                nums[i + 1] = key;
+            }
+        }
+    }
+
     @Override
     void insertionSort() {
-
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'insertionSort'");
-    }
-    
-    boolean highToLow = false;
-    void selectionSort(boolean hightToLow){
-        
-        if(!highToLow){
-        selectionSort();
-        return;
-        }
-        else if(hightToLow){
-        for(int i = 0; i<nums.length; i++){
-            int largestNum = i;
-            for(int k = i+1;k<nums.length;k++){
-                if(nums[k] > nums[largestNum]){
-                    largestNum = k;
-                }
+        for (int k = 1; k < nums.length; k++) {
+            int i = k - 1;
+            int key = nums[k];
+            while (i > -1 && nums[i] > key) {
+                nums[i + 1] = nums[i];
+                i--;
             }
-            int temp = nums[largestNum];
-            nums[largestNum] = nums[i];
-            nums[i] = temp;
+            nums[i + 1] = key;
         }
-
     }
-}
+
+    boolean hightToLow = false;
+
+    void selectionSort(boolean hightToLow) {
+
+        if (!hightToLow) {
+            selectionSort();
+            return;
+        } else if (hightToLow) {
+            for (int i = 0; i < nums.length; i++) {
+                int largestNum = i;
+                for (int k = i + 1; k < nums.length; k++) {
+                    if (nums[k] > nums[largestNum]) {
+                        largestNum = k;
+                    }
+                }
+                int temp = nums[largestNum];
+                nums[largestNum] = nums[i];
+                nums[i] = temp;
+            }
+
+        }
+    }
+
     @Override
     void selectionSort() {
         // outer loop
@@ -79,14 +110,34 @@ public class Activity1 extends IntegerManager implements PrintPretty {
 
     @Override
     void mergeSort() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'mergeSort'");
     }
 
     @Override
     int pickRandom() {
+        int total = nums.length;
+        int rand = (int)(Math.random()*nums.length + 1);
+        return nums[rand];
         // TODO Auto-generated method stub
         throw new UnsupportedOperationException("Unimplemented method 'pickRandom'");
+    }
+
+    int binarySearch(int something) {
+        int low = 0;
+        int high = nums.length - 1;
+        {
+            while (low <= high) {
+                int middle = (low + high)/2;
+                if (nums[middle] == something){
+                    return middle;
+                }
+                else if (nums[middle] > something) {
+                    high = middle - 1;
+                } else {
+                    low = middle + 1;
+                }
+            }
+        }
+        return -1;
     }
 
     public void printPretty() {
